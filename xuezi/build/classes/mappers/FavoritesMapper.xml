@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xuezi.store.mapper.FavoritesMapper">
+
+<delete id="deleteFavoritesByGoodsId" parameterType="cn.xuezi.store.bean.Favorites">
+		delete from t_favorites where goods_id=#{goodsId} and id=#{id}
+</delete>
+
+<insert id="insertFavorites" parameterType="cn.xuezi.store.bean.Favorites">
+		insert into t_favorites(
+				id,goods_id,
+				created_user ,created_time,modified_user ,modified_time)
+		values(
+			#{id},
+			#{goodsId},
+			#{createdUser},
+			#{createdTime},
+			#{modifiedUser},
+			#{modifiedTime}
+		)
+	</insert>
+	
+	<select id="selectAllFavorites" resultType="cn.xuezi.store.bean.Goods">
+		SELECT
+			g.goods_id goodsId,g.goods_name goodsName,
+			g.goods_money goodsMoney,g.goods_color goodsColor,
+			g.goods_standard goodsStandard,g.goods_image goodsImage,
+			g.goods_system goodsSystem,g.goods_storage goodsStorage,
+			g.goods_resolution goodsResolution,g.goods_graphics goodsGraphics,
+			g.goods_processor goodsProcessor,g.goods_displaystorage goodsDisplaystorage,
+			g.goods_type goodsType,g.goods_disk goodsDisk,
+			g.goods_bigimage goodsBigimage,g.goods_pack goodsPack,
+			g.created_user createdUser,g.created_time createdTime,
+			g.modified_user modifiedUser,g.modified_time modifiedTime
+		FROM 
+			t_goods g,t_favorites f
+		WHERE g.goods_id=f.goods_id and f.id=#{id}
+	</select>
+</mapper>

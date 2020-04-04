@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xuezi.store.mapper.GoodsMapper">
+	<!-- Goods selectGoodsByGoodId(Integer goodsId); -->
+	<select id="selectGoodsByGoodId" resultType="cn.xuezi.store.bean.Goods">
+		SELECT
+			goods_id goodsId,goods_name goodsName,
+			goods_money goodsMoney,goods_color goodsColor,
+			goods_standard goodsStandard,goods_image goodsImage,
+			goods_system goodsSystem,goods_storage goodsStorage,
+			goods_resolution goodsResolution,goods_graphics goodsGraphics,
+			goods_processor goodsProcessor,
+			goods_displaystorage goodsDisplaystorage,
+			goods_type goodsType,
+			goods_disk goodsDisk,
+			goods_bigimage goodsBigimage,
+			goods_pack goodsPack,
+			created_user createdUser,
+			created_time createdTime,
+			modified_user modifiedUser,
+			modified_time modifiedTime
+		FROM 
+			t_goods WHERE goods_id=#{goodsId}
+	</select>
+	<!-- Goods selectGoodsByGoodsType(String goodsType); -->
+	<select id="selectGoodsByGoodsType" resultType="cn.xuezi.store.bean.Goods">
+		SELECT
+			goods_id goodsId,
+			goods_name goodsName,
+			goods_money goodsMoney,
+			goods_color goodsColor,
+			goods_standard goodsStandard,
+			goods_image goodsImage,
+			goods_system goodsSystem,
+			goods_storage goodsStorage,
+			goods_resolution goodsResolution,
+			goods_graphics goodsGraphics,
+			goods_processor goodsProcessor,
+			goods_displaystorage goodsDisplaystorage,
+			goods_type goodsType,
+			goods_disk goodsDisk,
+			goods_bigimage goodsBigimage,
+			goods_pack goodsPack,
+			created_user createdUser,
+			created_time createdTime,
+			modified_user modifiedUser,
+			modified_time modifiedTime
+		FROM 
+			t_goods WHERE goods_type=#{goodsType}
+	</select>
+	
+	
+	
+	<!-- List<Goods> selectGoods(String messages); -->
+	
+
+
+
+
+
+</mapper>

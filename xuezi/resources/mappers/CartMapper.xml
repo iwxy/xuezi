@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.xuezi.store.mapper.CartMapper">
+  <insert id="insertCart" parameterType="cn.xuezi.store.bean.Cart">
+  		insert into t_cart(
+  			goods_id,
+  			id,
+  			goods_num,
+  			cart_money,
+  			created_user,
+  			created_time,
+  			modified_user,
+  			modified_time
+  		)values(
+  			#{goodsId},#{id},#{goodsNum},#{cartMoney},
+  			#{createdUser},#{createdTime},#{modifiedUser},#{modifiedTime}
+  		)
+  	</insert>
+  	<select id="selectCart" resultType="cn.xuezi.store.bean.Cart"  parameterType="cn.xuezi.store.bean.Cart">
+  		select cart_id   cartId,
+  			id,
+  			goods_id   goodsId,
+  			goods_num   goodsNum,
+  			cart_money   cartMoney,
+  			created_user  createdUser,
+  			created_time  createdTime,
+  			modified_user  modifiedUser,
+  			modified_time  modifiedTime
+  		from
+  			t_cart
+  		where  id=#{id}
+  	</select>
+  	<delete id="deleteCart">
+  		delete from
+  			t_cart
+  		where  cart_id=#{cartId}
+  	</delete>
+  	<select id="selectCartById" resultType="cn.xuezi.store.bean.Cart"  parameterType="cn.xuezi.store.bean.Cart">
+  		select cart_id   cartId,
+  			id,
+  			goods_id   goodsId,
+  			goods_num   goodsNum,
+  			cart_money   cartMoney,
+  			created_user  createdUser,
+  			created_time  createdTime,
+  			modified_user  modifiedUser,
+  			modified_time  modifiedTime
+  		from
+  			t_cart
+  		where  id=#{id} and goods_id=#{goodsId}
+  	</select>
+  	<update id="updateCart" parameterType="cn.xuezi.store.bean.Cart">
+  		update
+  			t_cart
+  			<set>
+  				<if test="goodsNum!=null">goods_num=#{goodsNum},</if>
+  				<if test="cartMoney!=null">cart_money=#{cartMoney},</if>
+  				
+  				<if test="createdUser!=null">created_user=#{createdUser},</if>
+  				<if test="createdTime!=null">created_time=#{createdTime},</if>
+  				<if test="modifiedUser!=null">modified_user=#{modifiedUser},</if>
+  				<if test="modifiedTime!=null">modified_time=#{modifiedTime},</if>
+  			</set>
+  		where  id=#{id} and goods_id=#{goodsId}
+  	</update>
+  </mapper>

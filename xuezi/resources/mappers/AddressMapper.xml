@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="cn.xuezi.store.mapper.AddressMapper">
+  <insert id="insertAddress" parameterType="cn.xuezi.store.bean.Address">
+  		insert into t_address(
+  			id,receiver_name,receiver_province,receiver_city,receiver_county,receiver_address,receiver_mobile,
+  			receiver_phone,receiver_zip,address_name,receiver_status,
+  			created_user ,created_time,modified_user,modified_time
+  		)values(
+  			#{id},#{receiverName},#{receiverProvince},#{receiverCity},#{receiverCounty},#{receiverAddress},
+  			#{receiverMobile},#{receiverPhone},#{receiverZip},#{addressName},#{receiverStatus},
+  			#{createdUser},#{createdTime},#{modifiedUser},#{modifiedTime}
+  		)
+  	</insert>
+  	<select id="selectAdressById" resultType="cn.xuezi.store.bean.Address">
+  		select 
+  			address_id  addressId,
+  			id,
+  			receiver_name  receiverName,
+  			receiver_province  receiverProvince,
+  			receiver_city   receiverCity,
+  			receiver_county   receiverCounty,
+  			receiver_address   receiverAddress,
+  			receiver_mobile   receiverMobile,
+  			receiver_phone   receiverPhone,
+  			receiver_zip    receiverZip,
+  			address_name    addressName,
+  			receiver_status    receiverStatus,
+  			created_user  createdUser,
+  			created_time  createdTime,
+  			modified_user  modifiedUser,
+  			modified_time  modifiedTime
+  		from
+  			t_address
+  		where id=#{id}
+  	</select>
+  	<select id="selectAdressByAddressId" resultType="cn.xuezi.store.bean.Address"  parameterType="cn.xuezi.store.bean.Address">
+  		select address_id  addressId,
+  			id,
+  			receiver_name  receiverName,
+  			receiver_province  receiverProvince,
+  			receiver_city   receiverCity,
+  			receiver_county   receiverCounty,
+  			receiver_address   receiverAddress,
+  			receiver_mobile   receiverMobile,
+  			receiver_phone   receiverPhone,
+  			receiver_zip    receiverZip,
+  			address_name    addressName,
+  			receiver_status    receiverStatus,
+  			created_user  createdUser,
+  			created_time  createdTime,
+  			modified_user  modifiedUser,
+  			modified_time  modifiedTime
+  		from
+  			t_address
+  		where  id=#{id} and address_id=#{addressId}
+  	</select>
+  	<update id="updateAddress" parameterType="cn.xuezi.store.bean.Address">
+  		update
+  			t_address
+  			<set>
+  				<if test="receiverName!=null">receiver_name=#{receiverName},</if>
+  				<if test="receiverProvince!=null">receiver_province=#{receiverProvince},</if>
+  				<if test="receiverCity!=null">receiver_city=#{receiverCity},</if>
+  				<if test="receiverCounty!=null">receiver_county=#{receiverCounty},</if>
+  				<if test="receiverAddress!=null">receiver_address=#{receiverAddress},</if>
+  				<if test="receiverMobile!=null">receiver_mobile=#{receiverMobile},</if>
+  				<if test="receiverPhone!=null">receiver_phone=#{receiverPhone},</if>
+  				<if test="receiverZip!=null">receiver_zip=#{receiverZip},</if>
+  				<if test="addressName!=null">address_name=#{addressName},</if>
+  				<if test="receiverStatus!=null">receiver_status=#{receiverStatus},</if>
+  				<if test="createdUser!=null">created_user=#{createdUser},</if>
+  				<if test="createdTime!=null">created_time=#{createdTime},</if>
+  				<if test="modifiedUser!=null">modified_user=#{modifiedUser},</if>
+  				<if test="modifiedTime!=null">modified_time=#{modifiedTime},</if>
+  			</set>
+  		where  id=#{id} and address_id=#{addressId}
+  	</update>
+  	
+  	<update id="updateAllAddressStatus" parameterType="Integer">
+  		update t_address set receiver_status=0 where id=#{id}
+  	</update>
+  	
+  	<delete id="deleteAddress" parameterType="cn.xuezi.store.bean.Address">
+  		delete from
+  			t_address
+  		where  id=#{id} and address_id=#{addressId}
+  	</delete>
+  </mapper>

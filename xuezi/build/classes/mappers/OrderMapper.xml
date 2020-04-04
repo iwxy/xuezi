@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xuezi.store.mapper.OrderMapper">
+	<!-- 根据用户id查询用户订单 -->
+	<select id="selectOrderByUserId" resultType="cn.xuezi.store.bean.Order">
+		select 
+				order_id orderId,
+				id,
+				goods_id goodsId,
+				order_status orderStatus,
+				goods_num goodsNum,
+				order_time orderTime,
+				order_money orderMoney,
+				created_user createdUser,
+				created_time createdTime,
+				modified_user modifiedUser,
+				modified_time modifiedTime,
+				address_id addressId
+		from t_order
+		where id=#{id}
+	</select>
+		<!-- 根据用户id和status查询用户订单 -->
+	<select id="selectOrderByIdAndStatus" resultType="cn.xuezi.store.bean.Order">
+		select 
+				order_id orderId,
+				id,
+				goods_id goodsId,
+				order_status orderStatus,
+				goods_num goodsNum,
+				order_time orderTime,
+				order_money orderMoney,
+				created_user createdUser,
+				created_time createdTime,
+				modified_user modifiedUser,
+				modified_time modifiedTime,
+				address_id addressId
+		from t_order
+		where id=#{id} and order_status=#{orderStatus}
+	</select>
+	<!-- 根据订单id查询订单详情 -->
+	<select id="selectOrderByOrderId" resultType="cn.xuezi.store.bean.Order">
+		select 
+				order_id orderId,
+				id,
+				goods_id goodsId,
+				order_status orderStatus,
+				goods_num goodsNum,
+				order_time orderTime,
+				order_money orderMoney,
+				created_user createdUser,
+				created_time createdTime,
+				modified_user modifiedUser,
+				modified_time modifiedTime,
+				address_id addressId
+		from t_order
+		where order_id=#{order_id}
+	</select>
+	<!-- 根据订单id删除订单 -->
+	<delete id="deleteOrderByOrderId">
+		delete from t_order where order_id=#{orderId}
+	</delete>
+	
+	<insert id="insertOrder" parameterType="cn.xuezi.store.bean.Order">
+		insert into t_order
+			(order_id,id,goods_id,order_status,goods_num,order_time,order_money,created_user,created_time,modified_user,modified_time,address_id)
+		values
+			(#{orderId},#{id},#{goodsId},#{orderStatus},#{goodsNum},#{orderTime},#{orderMoney},
+				#{createdUser},#{createdTime},#{modifiedUser},#{modifiedTime},#{addressId})
+	</insert>
+	
+	<update id="upadteOrder" parameterType="cn.xuezi.store.bean.Order">
+		update t_order
+			<set>
+				<if test="orderId!=null">order_id=#{orderId},</if>
+				<if test="orderStatus">order_status=#{orderStatus},</if>
+				<if test="modifiedUser!=null">modified_user=#{modifiedUser},</if>
+				<if test="modifiedTime!=null">modified_time=#{modifiedTime},</if>
+			</set>
+			where order_id=#{orderId}
+	</update>
+</mapper>

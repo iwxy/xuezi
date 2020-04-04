@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.xuezi.store.mapper.UserMapper">
+	<select id="selectByUserByUsername" resultType="cn.xuezi.store.bean.User">
+		SELECT id,username,password,email,phone,image,gender,created_user createdUser,
+		created_time createdTime,modified_user modifiedUser,modified_time modifiedTime
+		FROM t_user 
+		where username=#{username}
+	</select>
+	<insert id="insertUser" parameterType="cn.xuezi.store.bean.User">
+		insert into t_user(username,password,email,phone,image,gender,created_user,
+			created_time,modified_user,modified_time)
+		values(#{username},#{password},#{email},#{phone},#{image},#{gender},#{createdUser},
+		#{createdTime},#{modifiedUser},#{modifiedTime})
+	</insert>
+	
+	<select id="selectByUserByPhone" resultType="cn.xuezi.store.bean.User">
+		SELECT
+		id,
+		username,
+		password,
+		email,
+		phone,
+		image,
+		gender,
+		created_user createdUser,
+		created_time createdTime ,
+		modified_user modifiedUser,
+		modified_time modifiedTime
+		FROM
+		t_user where phone=#{phone}
+	</select>
+	<select id="selectByUserByEmail" resultType="cn.xuezi.store.bean.User">
+		SELECT
+		id,
+		username,
+		password,
+		email,
+		phone,
+		image,
+		gender,
+		created_user createdUser,
+		created_time createdTime ,
+		modified_user modifiedUser,
+		modified_time modifiedTime
+		FROM
+		t_user where email=#{email}
+	</select>
+	<!-- User matchPassword(String oldPwd); -->
+	<select id="matchPassword" resultType="cn.xuezi.store.bean.User">
+		SELECT
+		id,
+		username,
+		password,
+		email,
+		phone,
+		image,
+		gender,
+		created_user createdUser,
+		created_time createdTime ,
+		modified_user modifiedUser,
+		modified_time modifiedTime
+		FROM
+		t_user where password=#{password}
+	</select>
+	
+	<!-- User selectUserById(Integer id); -->
+	<select id="selectUserById" resultType="cn.xuezi.store.bean.User">
+		SELECT
+			id,
+			username,
+			password,
+			email,
+			phone,
+			image,
+			gender,
+			created_user createdUser,
+			created_time createdTime ,
+			modified_user modifiedUser,
+			modified_time modifiedTime
+		FROM
+			t_user where id=#{id}
+	</select>
+	
+	<!-- void updateUser(User user); -->
+	<update id="updateUser" parameterType="cn.xuezi.store.bean.User">
+	update
+		t_user
+		<set>
+			<if test="password!=null">password=#{password},</if>
+			<if test="username!=null">username=#{username},</if>
+			<if test="gender!=null">gender=#{gender},</if>
+			<if test="email!=null">email=#{email},</if>
+			<if test="phone!=null">phone=#{phone},</if>
+			<if test="image!=null">image=#{image},</if>
+			<if test="createdUser!=null">created_user=#{createdUser},</if>
+			<if test="createdTime!=null">created_time=#{createdTime},</if>
+			<if test="modifiedUser!=null">modified_user=#{modifiedUser},</if>
+			<if test="modifiedTime!=null">modified_time=#{modifiedTime},</if>
+			</set>
+		 where
+		 	id=#{id}
+	</update>
+	
+</mapper>
+  
+
+
